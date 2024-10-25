@@ -1,0 +1,130 @@
+<div class="container mx-auto p-6 my-12">
+  <div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+    <h2 class="text-2xl font-semibold mb-6 text-gray-700">Add Product</h2>
+
+    <form (ngSubmit)="addProduct()" #productForm="ngForm" novalidate>
+      <!-- Product Name -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+          Product Name
+        </label>
+        <input 
+          type="text" 
+          id="name"
+          name="name"
+          [(ngModel)]="name"
+          #nameInput="ngModel"
+          required
+          maxlength="50"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter product name"
+        />
+        <!-- Error message for Name -->
+        <div *ngIf="nameInput.invalid && nameInput.touched" class="text-red-500 text-sm">
+          <span *ngIf="nameInput.errors?.['required']">Product name is required.</span>
+          <span *ngIf="nameInput.errors?.['maxlength']">Product name cannot exceed 50 characters.</span>
+        </div>
+      </div>
+
+      <!-- Product Price -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+          Product Price
+        </label>
+        <input 
+          type="number" 
+          id="price"
+          name="price"
+          [(ngModel)]="price"
+          #priceInput="ngModel"
+          required
+          min="0"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter product price"
+        />
+        <!-- Error message for Price -->
+        <div *ngIf="priceInput.invalid && priceInput.touched" class="text-red-500 text-sm">
+          <span *ngIf="priceInput.errors?.['required']">Product price is required.</span>
+          <span *ngIf="priceInput.errors?.['min']">Product price cannot be negative.</span>
+        </div>
+      </div>
+
+      <!-- Product Description -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+          Product Description
+        </label>
+        <textarea 
+          id="description"
+          name="description"
+          [(ngModel)]="description"
+          #descriptionInput="ngModel"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+          rows="4"
+          placeholder="Enter product description"
+        ></textarea>
+        <!-- Error message for Description -->
+        <div *ngIf="descriptionInput.invalid && descriptionInput.touched" class="text-red-500 text-sm">
+          <span *ngIf="descriptionInput.errors?.['required']">Product description is required.</span>
+          <span *ngIf="descriptionInput.errors?.['minlength']">Description must contain at least 10 words.</span>
+        </div>
+      </div>
+
+      <!-- Product quantity -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+          Product Quantity
+        </label>
+        <input 
+          type="number" 
+          id="price"
+          name="price"
+          [(ngModel)]="quantity"
+          #quantityInput="ngModel"
+          required
+          min="0"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-500"
+          placeholder="Enter product quantity"
+        />
+        <!-- Error message for Price -->
+        <div *ngIf="quantityInput.invalid && priceInput.touched" class="text-red-500 text-sm">
+          <span *ngIf="quantityInput.errors?.['required']">Product quantity is required.</span>
+          <span *ngIf="quantityInput.errors?.['min']">Product quantity cannot be negative.</span>
+        </div>
+      </div>
+
+
+      <!-- Product Category -->
+      <div class="mb-4">
+        <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+          Product Category
+        </label>
+        <select 
+          id="category"
+          name="category"
+          [(ngModel)]="selectedCategory"
+          required
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+        >
+          <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+        </select>
+        <!-- Error message for Category -->
+        <div *ngIf="productForm.controls['category']?.invalid && productForm.controls['category']?.touched" class="text-red-500 text-sm">
+          <span>Category is required.</span>
+        </div>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex justify-end">
+        <button 
+          type="submit"
+          class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+          [disabled]="!productForm.form.valid"
+        >
+          Add Product
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

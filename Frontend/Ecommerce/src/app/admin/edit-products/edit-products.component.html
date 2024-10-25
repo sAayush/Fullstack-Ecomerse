@@ -1,0 +1,83 @@
+<div *ngIf="product">
+    <div class="container mx-auto p-6 my-12">
+        <div class="bg-white shadow-md rounded-lg p-6 max-w-lg mx-auto">
+          <h2 class="text-2xl font-semibold mb-6 text-gray-700">Edit Product</h2>
+      
+          <form (ngSubmit)="saveProduct()" #editProductForm="ngForm" novalidate>
+            <!-- Product Name -->
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="name">
+                Product Name
+              </label>
+              <input 
+                type="text" 
+                id="name"
+                name="name"
+                [(ngModel)]="product.name"
+                required
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter product name"
+              />
+            </div>
+      
+            <!-- Product Price -->
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="price">
+                Product Price
+              </label>
+              <input 
+                type="number" 
+                id="price"
+                name="price"
+                [(ngModel)]="product.price"
+                required
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                placeholder="Enter product price"
+              />
+            </div>
+      
+            <!-- Product Description -->
+            <div class="mb-4">
+              <label class="block text-gray-700 text-sm font-bold mb-2" for="description">
+                Product Description
+              </label>
+              <textarea 
+                id="description"
+                name="description"
+                [(ngModel)]="product.description"
+                required
+                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                rows="4"
+                placeholder="Enter product description"
+              ></textarea>
+            </div>
+      
+            <!-- Product Category -->
+            <div class="mb-4">
+                <label class="block text-gray-700 text-sm font-bold mb-2" for="category">
+                  Product Category
+                </label>
+                <select 
+                  id="category"
+                  name="category"
+                  [(ngModel)]="product.category"
+                  required
+                  class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                >
+                  <option *ngFor="let cat of categories" [value]="cat">{{ cat }}</option>
+                </select>
+              </div>
+            <!-- Update Button -->
+            <div class="flex justify-end">
+              <button 
+                type="submit"
+                class="bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                [disabled]="!editProductForm.form.valid"
+              >
+                Update Product
+              </button>
+            </div>
+          </form>
+        </div>
+    </div>
+</div>

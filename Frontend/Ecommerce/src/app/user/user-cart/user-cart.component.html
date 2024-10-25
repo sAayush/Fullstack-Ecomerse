@@ -1,0 +1,54 @@
+<div class="max-w-4xl mx-auto p-6 my-14">
+    <!-- Cart Heading -->
+    <h1 class="text-2xl font-bold mb-4">Your Cart</h1>
+  
+    <!-- Cart Items List -->
+    <div *ngIf="cartItems.length > 0; else emptyCart" class="space-y-6">
+      <div *ngFor="let item of cartItems" class="flex items-center justify-between bg-white shadow-md rounded-lg p-4">
+        <!-- Product Info -->
+        <div>
+          <h2 class="text-lg font-semibold">{{ item.name }}</h2>
+          <p class="text-gray-600">{{ item.description }}</p>
+          <p class="text-gray-900 font-bold">{{ item.price | currency: 'INR' }} x {{ item.incart }}</p>
+        </div>
+        <!-- Remove Button -->
+        <button
+          (click)="removeItem(item.id)"
+          class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition duration-150 ease-in-out"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  
+    <!-- Cart Summary -->
+    <div class="mt-8">
+      <h3 class="text-xl font-semibold">Cart Summary</h3>
+      <div class="flex items-center justify-between mt-4">
+        <p class="text-lg font-bold">Total:</p>
+        <p class="text-xl font-bold text-blue-600">{{ getTotal() | currency: 'INR' }}</p>
+      </div>
+  
+      <!-- Clear Cart Button -->
+      <button
+        (click)="clearCart()"
+        class="w-32 mt-6 mr-2 bg-red-500 text-white py-3 rounded-lg hover:bg-red-600 transition duration-150 ease-in-out"
+      >
+        Clear Cart
+      </button>
+      <button
+        class="w-32 mt-6 bg-blue-500 text-white py-3 rounded-lg hover:bg-blue-600 transition duration-150 ease-in-out"
+      >
+        Buy
+      </button>
+    </div>
+  
+    <!-- Empty Cart Message -->
+    <ng-template #emptyCart>
+      <div class="bg-gray-100 p-6 rounded-lg text-center">
+        <h2 class="text-xl font-semibold">Your cart is empty!</h2>
+        <p class="text-gray-600">Browse products and add items to your cart.</p>
+      </div>
+    </ng-template>
+  </div>
+  
